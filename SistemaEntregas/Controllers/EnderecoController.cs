@@ -33,11 +33,20 @@ namespace Controllers
 
         }
 
+        public void ExcluirEndereco(int id)
+        {
+            Endereco end = pesquisarPorId(id);
+
+            if(end != null)
+            {
+                ListEndereco.Remove(end);
+            }
+        }
+
         public List<Endereco> listarEnderecos()
         {
             return ListEndereco;
         }
-
 
     }
 }

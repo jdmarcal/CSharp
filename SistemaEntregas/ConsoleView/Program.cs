@@ -190,7 +190,65 @@ namespace ConsoleView
 
         private static void AlterarDadosCliente()
         {
-            //TODO: fazer depois
+            ClienteController cc = new ClienteController();
+
+            int idCliente;
+
+            ListarClientesCadastrados();
+
+            Console.Write("Digite a ID do Cliente a ser alterado: ");
+
+            idCliente = int.Parse(Console.ReadLine());
+
+            Cliente cli = cc.PesquisarPorID(idCliente);
+
+            if(cli != null)
+            {
+                Console.WriteLine();
+
+                Console.Write("Digite o nome: ");
+                cli.Nome = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Console.Write("Digite o cpf: ");
+                cli.Cpf = Console.ReadLine();
+
+                
+
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.Write("Cliente não encontrado");
+                Console.WriteLine();
+            }
+
+        }
+
+        private static Endereco AlterarEndereco(int id)
+        {
+            EnderecoController ec = new EnderecoController();
+            Endereco end = ec.pesquisarPorId(id);            
+            
+                Console.WriteLine();
+
+                Console.Write("Digite o nome da rua: ");
+                end.Rua = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Console.Write("Digite o numero: ");
+                end.Numero = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+
+                Console.Write("Digite o complemento: ");
+                end.Complemento = Console.ReadLine();
+
+                Console.WriteLine();
+
+            return end;
         }
 
         private static void ExibirDadosCliente(Cliente cliente)
