@@ -65,6 +65,7 @@ namespace ConsoleView
                         PesquisarCliente();
                         break;
                     case OpcoesMenuPrincipal.EditarCliente:
+                        AlterarDadosCliente();
                         break;
                     case OpcoesMenuPrincipal.ExcluirCliente:
                         ExcluirCliente();
@@ -214,7 +215,7 @@ namespace ConsoleView
                 Console.Write("Digite o cpf: ");
                 cli.Cpf = Console.ReadLine();
 
-                
+                Endereco e = AlterarEndereco(cli.EnderecoID);
 
             }
             else
