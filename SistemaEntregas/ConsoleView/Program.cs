@@ -9,7 +9,14 @@ namespace ConsoleView
     class Program
     {
         enum OpcoesMenuPrincipal
+        {
+            MenuCliente = 1,
+            MenuFornecedor = 2,
+            MenuEntregador = 3,
+            Sair = 0
+        }        
 
+        enum OpcoesMenuCliente
         {
             CadastrarCliente = 1,
             PesquisarCliente = 2,
@@ -20,70 +27,190 @@ namespace ConsoleView
             Sair = 7
         }
 
-        private static OpcoesMenuPrincipal Menu()
+        enum OpcoesMenuFornecedor
+        {
+            CadastrarFornecedor = 1,
+            PesquisarFornecedor = 2,
+            EditarFornecedor = 3,
+            ExcluirFornecedor = 4,
+            ListarFornecedor = 5,
+            LimparTela = 6,
+            Sair = 7
+        }
+
+        enum OpcoesMenuEntregador
+        {
+            CadastrarEntregador = 1,
+            PesquisarEntregador = 2,
+            EditarEntregador = 3,
+            ExcluirEntregador = 4,
+            ListarEntregador = 5,
+            LimparTela = 6,
+            Sair = 7
+        }
+
+        private static OpcoesMenuPrincipal MenuPrincipal()
+        {
+            Console.WriteLine("Escolha sua opcao");
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("|      -- Menu Principal --    |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 1 - Area do Cliente          |");
+            Console.WriteLine("| 2 - Area do Fornecedor       |");
+            Console.WriteLine("| 3 - Area do Entregador       |");
+            Console.WriteLine("| 0 - Sair                     |");
+            Console.WriteLine("--------------------------------");
+
+            string opcao = Console.ReadLine();
+            return (OpcoesMenuPrincipal)int.Parse(opcao);
+        }
+
+        private static OpcoesMenuCliente MenuCliente()
         {
             Console.WriteLine("Escolha sua opcao");
             Console.WriteLine("");            
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("|      - Clientes -     |");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("| 1 - Cadastrar Novo    |"); 
-            Console.WriteLine("| 2 - Pesquisar Cliente |");
-            Console.WriteLine("| 3 - Editar Cliente    |");
-            Console.WriteLine("| 4 - Excluir Cliente   |");
-            Console.WriteLine("| 5 - Listar Clientes   |");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("| 6 - Limpar Tela       |");
-            Console.WriteLine("| 7 - Sair              |");
-            Console.WriteLine("-------------------------");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("|         - Clientes -         |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 1 - Cadastrar Novo           |"); 
+            Console.WriteLine("| 2 - Pesquisar Cliente        |");
+            Console.WriteLine("| 3 - Editar Cliente           |");
+            Console.WriteLine("| 4 - Excluir Cliente          |");
+            Console.WriteLine("| 5 - Listar Clientes          |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 6 - Limpar Tela              |");
+            Console.WriteLine("| 7 - Voltar ao menu principal |");
+            Console.WriteLine("--------------------------------");
 
 
             //return Convert.ToInt32(Console.ReadLine());
             string opcao = Console.ReadLine();
-            return (OpcoesMenuPrincipal) int.Parse(opcao);
+            return (OpcoesMenuCliente) int.Parse(opcao);
+        } 
+        
+        private static OpcoesMenuFornecedor MenuFornecedor()
+        {
+            Console.WriteLine("Escolha sua opcao");
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("|       - Fornecedores -       |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 1 - Cadastrar Novo           |");
+            Console.WriteLine("| 2 - Pesquisar Fornecedor     |");
+            Console.WriteLine("| 3 - Editar Fornecedor        |");
+            Console.WriteLine("| 4 - Excluir Fornecedor       |");
+            Console.WriteLine("| 5 - Listar Fornecedor        |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 6 - Limpar Tela              |");
+            Console.WriteLine("| 7 - Voltar ao menu principal |");
+            Console.WriteLine("--------------------------------");
+
+            string opcao = Console.ReadLine();
+            return (OpcoesMenuFornecedor)int.Parse(opcao);
+        }
+
+        private static OpcoesMenuEntregador MenuEntregador()
+        {
+            Console.WriteLine("Escolha sua opcao");
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("|       - Entregadores -       |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 1 - Cadastrar Novo           |");
+            Console.WriteLine("| 2 - Pesquisar Entregador     |");
+            Console.WriteLine("| 3 - Editar Entregador        |");
+            Console.WriteLine("| 4 - Excluir Entregador       |");
+            Console.WriteLine("| 5 - Listar Entregador        |");
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("| 6 - Limpar Tela              |");
+            Console.WriteLine("| 7 - Voltar ao menu principal |");
+            Console.WriteLine("--------------------------------");
+
+            string opcao = Console.ReadLine();
+            return (OpcoesMenuEntregador)int.Parse(opcao);
         }
 
         static void Main(string[] args)
         {
-            OpcoesMenuPrincipal opcaoDigitada = 
+
+            OpcoesMenuPrincipal opDigitada =
                 OpcoesMenuPrincipal.Sair;
             do
             {
-                opcaoDigitada = Menu();
+                opDigitada = MenuPrincipal();
+                
+                switch (opDigitada)
+                {
+                    case OpcoesMenuPrincipal.MenuCliente:
+                        MenuDoCliente();
+                        break;
+
+                    case OpcoesMenuPrincipal.MenuFornecedor:
+                        MenuFornecedor();
+                        break;
+
+                    case OpcoesMenuPrincipal.MenuEntregador:
+                        MenuEntregador();
+                        break;
+                   
+                    case OpcoesMenuPrincipal.Sair:
+                        break;
+
+                    default:
+                        break;
+                }
+
+            } while (opDigitada != OpcoesMenuPrincipal.Sair);                    
+            
+        }
+
+        private static void MenuDoCliente()
+        {
+            OpcoesMenuCliente opcaoDigitada =
+            OpcoesMenuCliente.Sair;
+            do
+            {
+                opcaoDigitada = MenuCliente();
 
                 switch (opcaoDigitada)
                 {
-                    case OpcoesMenuPrincipal.CadastrarCliente:
+                    case OpcoesMenuCliente.CadastrarCliente:
                         Cliente c = CadastrarCliente();
 
                         ClienteController cc = new ClienteController();
                         cc.SalvarCliente(c);
-                        
+
                         ExibirDadosCliente(c);
                         break;
-                    case OpcoesMenuPrincipal.PesquisarCliente:
+
+                    case OpcoesMenuCliente.PesquisarCliente:
                         PesquisarCliente();
                         break;
-                    case OpcoesMenuPrincipal.EditarCliente:
+
+                    case OpcoesMenuCliente.EditarCliente:
                         AlterarDadosCliente();
                         break;
-                    case OpcoesMenuPrincipal.ExcluirCliente:
+
+                    case OpcoesMenuCliente.ExcluirCliente:
                         ExcluirCliente();
                         break;
-                    case OpcoesMenuPrincipal.ListarClientes:
+
+                    case OpcoesMenuCliente.ListarClientes:
                         ListarClientesCadastrados();
                         break;
-                    case OpcoesMenuPrincipal.LimparTela:
+
+                    case OpcoesMenuCliente.LimparTela:
                         break;
-                    case OpcoesMenuPrincipal.Sair:
+
+                    case OpcoesMenuCliente.Sair:
                         break;
-                    
+
                     default:
                         break;
                 }
-               
-            } while (opcaoDigitada != OpcoesMenuPrincipal.Sair);
-            
+
+            } while (opcaoDigitada != OpcoesMenuCliente.Sair);
         }
 
         private static void ExcluirCliente()
@@ -119,7 +246,7 @@ namespace ConsoleView
             Console.WriteLine();
 
             return cli;            
-        }
+        }        
 
         //Metodo geral para cadastro de endereco
         private static Endereco CadastrarEndereco()
